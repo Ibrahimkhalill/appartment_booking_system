@@ -1,0 +1,129 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block main_content %}
+
+<div class="mt-4">
+  <h1 style="text-align: center; font-style: italic; color: rgb(73, 4, 100);">Reservation form</h1>
+</div>
+<section class="section contact-section" id="next">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+        
+        <form action="{% url 'reservation' room_id %}" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="check_in">Date Check In</label>
+              <input type="date" id="check_in" class="form-control" name="check_in" required>
+            </div>
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="check_out">Date Check Out</label>
+              <input type="date" id="check_out" class="form-control" name="check_out" required>
+            </div>
+            
+          </div>
+          <div class="row">
+
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="name">Name</label>
+              <input type="text" id="name" class="form-control " name="name"  required>
+            </div>
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="phone">Phone</label>
+              <input type="tel" id="phone" class="form-control " name="phone_number" required>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <label class="text-black font-weight-bold" for="email">Email</label>
+              <input type="email" id="email" class="form-control"  name="email" required>
+            </div>
+          </div>
+
+      
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <!-- <label class="text-black font-weight-bold" for="amount">Room No</label> -->
+              <input value="{{room.room_no}}" id="room_no" class="form-control" hidden  readonly>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input type="submit" value="Reserve Now" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
+        <div class="row">
+          <div class="col-md-10 ml-auto contact-info">
+            <p><span class="d-block">Address:</span> <span class="text-black"> 98 West 21th Street, Suite 721 New York NY 10016</span></p>
+            <p><span class="d-block">Phone:</span> <span class="text-black"> (+880) 435 3533</span></p>
+            <p><span class="d-block">Email:</span> <span class="text-black"> info@yourdomain.com</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+
+
+  $("#check_in").change(function () {
+
+ 
+   
+    var check_out = $("#check_out").val();
+    var check_out = $("#room_no").val();
+    var check_out = $("#amount").val();
+    const check_in = $(this).val();  // get the selected subject ID from the HTML dropdown list 
+    $.ajax({                       // initialize an AJAX request
+        type: "POST",
+        url: '{% url "get_date" %}',
+        data: {
+          'check_in': check_in,       // add the country id to the POST parameters
+          'check_out': check_out,
+          'room_no' : room_no,
+         
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function(data){
+          if (data > 0){
+                alert("Room is not avilable this date,please choose another date")
+              }
+        }
+    });
+});  
+
+    $("#check_out").change(function () {
+
+        
+        var check_in = $("#check_in").val();
+        var room_no = $("#room_no").val();
+        var price = $("#amount").val();
+        const check_out = $(this).val();  // get the selected subject ID from the HTML dropdown list 
+        $.ajax({                       // initialize an AJAX request
+            type: "POST",
+            url: '{% url "get_date" %}',
+            data: {
+                'check_in': check_in,       // add the country id to the POST parameters
+                'check_out': check_out,
+                'room_no' : room_no,
+                
+                'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function(data){
+              if (data > 0){
+                alert("Room is not avilable this Date,please choose another Date")
+              }
+            }
+    });
+});  
+
+
+</script>
+{% endblock main_content %} 

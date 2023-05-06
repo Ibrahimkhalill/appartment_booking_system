@@ -1,0 +1,46 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block style_content %}
+.thumbnail{
+width: 70%;
+height: 150px;
+-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+-moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+}
+{% endblock style_content %}
+{% block main_content %}
+<!-- our_room -->
+<div class="our_room">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="titlepage">
+               <h2>Avilable Room</h2>
+               <p>Lorem Ipsum available, but the majority have suffered </p>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         {% for room in list %}
+
+         <div class="col-md-3">
+            <div id="serv_hover" class="room">
+               <div class="room_img">
+                  <figure><img class="thumbnail" src="{{room.room_image.url}}" alt="#" /></figure>
+               </div>
+               <div class="bed_room">
+                  <h3>{{room.room_type}}</h3>
+                  <p style="color: brown;">{{room.price}} BDT / Per Night</p>
+                  <a  href="{% url 'reservation' room.pk %}" class="btn btn-info">Book Now</a>
+               </div>
+            </div>
+         </div>
+
+
+         {% endfor %}
+      </div>
+   </div>
+</div>
+<!-- end our_room -->
+{% endblock main_content %}

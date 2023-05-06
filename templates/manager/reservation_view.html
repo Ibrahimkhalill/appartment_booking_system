@@ -1,0 +1,46 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block main_content %}
+
+  <h3 style="font-family: 'Fredoka One', cursive; text-align: center;" class="brown-text">Reservation Status</h3>
+  <div id="message">
+  </div>
+  <div class="table-responsive-md">
+  <table class="table table-bordered table-striped">
+          <thead class="red lighten-4">
+            <tr>
+               <th>Serial No</th>
+                <th>Customer Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Room No</th>
+                <th>Room Type</th>
+                <th>Price</th>
+                <th>Check In </th>
+                <th>Check Out </th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for room in data%}
+                    <tr>
+              <!-- <td>{{data.booked_on}}</th> -->
+                <td>{{forloop.counter}} </td>
+              <td>{{room.name}}</td>
+              <td>{{room.phone_number}}</td>
+              <td>{{room.email}}</td>
+              <td>{{room.room_no}}</td>
+              <td>{{room.room_no.room_type}}</td>
+              <td>{{room.amount}}</td>
+              <td>{{room.check_in_date}}</td>
+              <td>{{room.check_out_date}}</td>
+              <td><a class="btn btn-success" href="#">Edit</a></td>
+              <td><a class="btn btn-danger" href="" id="{{room.id}}">Delete</a></td>
+
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+{%  endblock main_content %}

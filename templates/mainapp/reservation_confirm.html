@@ -1,0 +1,43 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block main_content %}
+
+<!-- our_room -->
+<div class="our_room" style="margin-top: auto;">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="titlepage">
+               <h2>Booking Details</h2>
+            </div>
+         </div>
+      </div>
+      <div class="card col-md-8">
+      <div class="row">
+        
+            <div class="col-md-4 col-sm-6">
+               <div id="serv_hover" class="room">
+                  <div class="room_img">
+                     <figure><img class="thumbnail" src="{{data.room_image.url}}" alt="#" /></figure>
+                  </div>
+                  
+                  <div class="bed_room">
+                   <div class="card-content">
+                     <span class="red-text text-lighten-2" style="font-size:2rem">{{data.room_type}}</span>
+                     <p><b>Stay Duration:</b> {{start_date}} - {{end_date}}</p>
+                     <p><b>Room No: </b> {{data.room_no}}</p>
+                     <p><b>Total Bill: </b> {{no_of_days}}*{{data.price}} = {{bill}} rupees</p>
+                     
+                   </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+
+      </div>
+   </div>
+</div>
+<!-- end our_room -->     
+{% endblock main_content %}
